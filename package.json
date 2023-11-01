@@ -1,0 +1,31 @@
+{
+  "packageManager": "yarn@4.0.0",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "parcel src/app.js --hmr-port 50619"
+  },
+  "devDependencies": {
+    "@parcel/core": "^2.10.1",
+    "buffer": "^5.5.0||^6.0.0",
+    "crypto-browserify": "^3.12.0",
+    "events": "^3.1.0",
+    "https-browserify": "^1.0.0",
+    "parcel": "^2.10.1",
+    "process": "^0.11.10",
+    "punycode": "^1.4.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.1.0",
+    "string_decoder": "^1.3.0",
+    "url": "^0.11.0"
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^2.1.2",
+    "@eniblock/sdk": "0.4.0-beta.2537",
+    "@ethersproject/contracts": "^5.7.0",
+    "@ethersproject/logger": "^5.7.0",
+    "@ethersproject/properties": "^5.7.0",
+    "@ethersproject/transactions": "^5.7.0",
+    "ethers": "5.7.2",
+    "websocket": "^1.0.34"
+  }
+}

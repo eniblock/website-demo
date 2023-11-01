@@ -1,0 +1,14 @@
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# misc
+.parcel-cache/**
+.parcel-cache/data.mdb
+
+dist
