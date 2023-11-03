@@ -611,8 +611,6 @@ const configureClient = async ()=>{
     });
 };
 window.onload = async ()=>{
-    const buttonEl = document.getElementById("demo-button");
-    buttonEl.addEventListener("click", mint);
     await configureClient();
     sdk = new (0, _sdk.Eniblock)({
         appId: eniblockAppId,
@@ -629,6 +627,8 @@ window.onload = async ()=>{
             }
         ]
     });
+    const buttonEl = document.getElementById("demo-button");
+    buttonEl.addEventListener("click", mint);
 };
 const login = async ()=>{
     await auth0Client.loginWithPopup({
@@ -672,8 +672,11 @@ const mint = async ()=>{
     };
     var req = _https.request(options, function(res) {
         res.setEncoding("utf8");
-        res.on("data", function(chunk) {
-            console.log(chunk);
+        res.on("data", async function(chunk) {
+            const hash = JSON.parse(JSON.parse(chunk).body).hash;
+            console.log(hash);
+            const provider = await sdk.getProvider();
+            await provider.waitForTransaction(hash, 2);
             buttonEl.innerHTML = "Learn more";
             buttonEl.href = (0, _sdk.urlConfig).API_BASE_URL + "/docs";
             linkEl.href = "https://testnets.opensea.io/" + walletAddress;
