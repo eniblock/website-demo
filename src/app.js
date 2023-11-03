@@ -15,7 +15,7 @@ switch (domain) {
 
     urlConfig.API_BASE_URL = "https://testing.sdk.eniblock.com";
 
-    eniblockAppId = 'sharp-bell-8429'; 
+    eniblockAppId = 'intelligent-panini-1751'; 
     eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'testing.demo.eniblock.com';
