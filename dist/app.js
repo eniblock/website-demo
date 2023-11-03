@@ -588,7 +588,7 @@ switch(domain){
         auth0ClientId = "BpfQk1mCjnLak5e42iHX24feDnXRG1bq";
         auth0CookieDomain = ".eniblock.com";
         (0, _sdk.urlConfig).API_BASE_URL = "https://testing.sdk.eniblock.com";
-        eniblockAppId = "keen-hoover-4794";
+        eniblockAppId = "sharp-bell-8429";
         eniblockContract = "0x88D7275D31E55d6a71a516B49b3DcD3282eE8845";
         eniblockTokenId = "1";
         eniblockMintDomain = "testing.demo.eniblock.com";
@@ -651,12 +651,11 @@ const mint = async ()=>{
     if (!isAuthenticated) await login();
     let wallet, account;
     try {
-        wallet = await sdk.wallet.instantiate();
-        account = await wallet.account.instantiate("My first account");
-    } catch (error) {
         await sdk.wallet.destroy();
         wallet = await sdk.wallet.instantiate();
         account = await wallet.account.instantiate("My first account");
+    } catch (error) {
+        console.log(error);
     }
     const walletAddress = await account.getAddress();
     console.log(`Account Details:

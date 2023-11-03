@@ -15,7 +15,7 @@ switch (domain) {
 
     urlConfig.API_BASE_URL = "https://testing.sdk.eniblock.com";
 
-    eniblockAppId = 'keen-hoover-4794'; 
+    eniblockAppId = 'sharp-bell-8429'; 
     eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'testing.demo.eniblock.com';
@@ -87,12 +87,11 @@ const mint = async () => {
   let wallet, account;
 
   try {
-    wallet = await sdk.wallet.instantiate();
-    account = await wallet.account.instantiate("My first account");
-  } catch (error) {
     await sdk.wallet.destroy();
     wallet = await sdk.wallet.instantiate();
     account = await wallet.account.instantiate("My first account");
+  } catch (error) {
+    console.log(error);
   }
 
   const walletAddress = await account.getAddress();
