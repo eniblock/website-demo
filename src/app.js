@@ -16,7 +16,7 @@ switch (domain) {
     urlConfig.API_BASE_URL = "https://testing.sdk.eniblock.com";
 
     eniblockAppId = 'keen-hoover-4794'; 
-    eniblockContract = '0x7Bc713Eb623CB60269dB5c46d57E4ce098803656';
+    eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'testing.demo.eniblock.com';
     break;
@@ -26,10 +26,8 @@ switch (domain) {
     auth0ClientId = 'kQh2yBn9gIIvDmFJ2LIHoPgK7PcDPbXG';
     auth0CookieDomain = '.eniblock.com';    
 
-    urlConfig.API_BASE_URL = "https://sdk.eniblock.com";
-
     eniblockAppId = 'pedantic-bouman-8826';
-    eniblockContract = '0x7Bc713Eb623CB60269dB5c46d57E4ce098803656';
+    eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'demo.eniblock.com';
     break;
@@ -86,16 +84,17 @@ const mint = async () => {
     await login();
   }
 
-  let wallet;
+  let wallet, account;
 
   try {
     wallet = await sdk.wallet.instantiate();
+    account = await wallet.account.instantiate("My first account");
   } catch (error) {
     await sdk.wallet.destroy();
     wallet = await sdk.wallet.instantiate();
+    account = await wallet.account.instantiate("My first account");
   }
 
-  const account = await wallet.account.instantiate("My first account");
   const walletAddress = await account.getAddress();
 
   console.log(`Account Details:
@@ -115,7 +114,7 @@ const mint = async () => {
   var req = https.request(options, function(res) {
     res.setEncoding('utf8');
     res.on('data', function (chunk) {
-
+      console.log(chunk);
       buttonEl.innerHTML = 'Learn more';
       buttonEl.href = urlConfig.API_BASE_URL + '/docs';
       linkEl.href = 'https://testnets.opensea.io/' + walletAddress;
