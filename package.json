@@ -1,8 +1,8 @@
 {
   "packageManager": "yarn@4.0.0",
-  "main": "src/app.js",
   "scripts": {
-    "start": "parcel src/app.js --hmr-port 50619"
+    "start": "parcel src/app.js --hmr-port 50619",
+    "build": "parcel build src/app.js"
   },
   "devDependencies": {
     "@parcel/core": "^2.10.1",
