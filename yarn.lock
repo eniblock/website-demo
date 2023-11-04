@@ -1425,6 +1425,18 @@
     "@swc/core" "^1.3.36"
     nullthrows "^1.1.1"
 
+"@parcel/optimizer-terser@^2.10.2":
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/@parcel/optimizer-terser/-/optimizer-terser-2.10.2.tgz#c7c5392f8e1086f5987c3ed484d78a4d399dc598"
+  integrity sha512-caHY60EvisfAJ8LsPz9HEFyEB0NwT2LXDQD3ikSUiaI4aEdxpfd18TbhRYdqw8eELSVuyVDJa/vPhBoEuW3ORg==
+  dependencies:
+    "@parcel/diagnostic" "2.10.2"
+    "@parcel/plugin" "2.10.2"
+    "@parcel/source-map" "^2.1.1"
+    "@parcel/utils" "2.10.2"
+    nullthrows "^1.1.1"
+    terser "^5.2.0"
+
 "@parcel/package-manager@2.10.2":
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/@parcel/package-manager/-/package-manager-2.10.2.tgz#5ef4ed90889a2f75ab66800208822a51d2fb7779"
@@ -6920,7 +6932,7 @@ terser-webpack-plugin@^5.3.7:
     serialize-javascript "^6.0.1"
     terser "^5.16.8"
 
-terser@^5.16.8:
+terser@^5.16.8, terser@^5.2.0:
   version "5.24.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-5.24.0.tgz#4ae50302977bca4831ccc7b4fef63a3c04228364"
   integrity sha512-ZpGR4Hy3+wBEzVEnHvstMvqpD/nABNelQn/z2r0fjVWGQsN3bpOLzQlqDxmb4CDZnXq5lpjnQ+mHQLAOpfM5iw==
