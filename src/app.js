@@ -26,7 +26,7 @@ switch (domain) {
     auth0ClientId = 'kQh2yBn9gIIvDmFJ2LIHoPgK7PcDPbXG';
     auth0CookieDomain = '.eniblock.com';    
 
-    eniblockAppId = 'pedantic-bouman-8826';
+    eniblockAppId = 'bold-rosalind-5706';
     eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'demo.eniblock.com';
