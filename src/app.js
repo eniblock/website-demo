@@ -8,7 +8,7 @@ let sdk = null;
 let auth0Domain, auth0ClientId, auth0CookieDomain, eniblockAppId, eniblockContract, eniblockTokenId, eniblockMintDomain;
 
 switch (domain) {
-  case 'eniblock.webflow.io':
+/*   case 'eniblock.webflow.io':
     auth0Domain = 'testing-eniblock-sdk.eu.auth0.com';
     auth0ClientId = 'BpfQk1mCjnLak5e42iHX24feDnXRG1bq';
     auth0CookieDomain = '.eniblock.com';    
@@ -19,7 +19,7 @@ switch (domain) {
     eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'testing.demo.eniblock.com';
-    break;
+    break; */
 
   default:
     auth0Domain = 'eniblock-sdk.eu.auth0.com';
