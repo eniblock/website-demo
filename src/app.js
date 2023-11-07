@@ -8,7 +8,7 @@ let sdk = null;
 let auth0Domain, auth0ClientId, auth0CookieDomain, eniblockAppId, eniblockContract, eniblockTokenId, eniblockMintDomain;
 
 switch (domain) {
-  case 'testing.eniblock.com':
+  case 'eniblock.webflow.io':
     auth0Domain = 'testing-eniblock-sdk.eu.auth0.com';
     auth0ClientId = 'BpfQk1mCjnLak5e42iHX24feDnXRG1bq';
     auth0CookieDomain = '.eniblock.com';    
