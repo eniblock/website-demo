@@ -109,7 +109,7 @@ const mint = async () => {
 
   console.log(timeWallet);
 
-  textEl.innerHTML = 'Wallet created in <span class="text-gradient__teal">' + Math.ceil(timeWallet / 1000) + 'sec</span>!<br />Minting in progress...';
+  textEl.innerHTML = 'Wallet created !<br />Minting in progress...';
 
   var options = {
     host: eniblockMintDomain,
@@ -132,7 +132,7 @@ const mint = async () => {
 
       buttonTextEl.innerHTML = 'Learn more';
       buttonEl.href = urlConfig.API_BASE_URL + '/docs';
-      const link = 'https://testnets.opensea.io/' + walletAddress;
+      const link = 'https://testnets.opensea.io/assets/mumbai/' + eniblockContract + '/' + eniblockTokenId;
 
       loaderEl.style.display = 'none';
       buttonTextEl.style.display = 'flex';  
@@ -147,7 +147,7 @@ const mint = async () => {
       
       console.log(time);
 
-      textEl.innerHTML = 'Your wallet is ready!<br />Check your <a href="' + link + '" class="text-gradient__teal" target="_blank">NFT</a>.';
+      textEl.innerHTML = '<a href="' + link + '" target="_blank">Your wallet is ready!<br />Check your <span class="text-gradient__teal">NFT</span></a>.';
     });
   });
 

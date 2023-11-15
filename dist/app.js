@@ -665,7 +665,7 @@ const mint = async ()=>{
     var endWallet = window.performance.now();
     var timeWallet = endWallet - startWallet;
     console.log(timeWallet);
-    textEl.innerHTML = 'Wallet created in <span class="text-gradient__teal">' + Math.ceil(timeWallet / 1000) + "sec</span>!<br />Minting in progress...";
+    textEl.innerHTML = "Wallet created !<br />Minting in progress...";
     var options = {
         host: eniblockMintDomain,
         port: 443,
@@ -682,7 +682,7 @@ const mint = async ()=>{
             await provider.waitForTransaction(hash);
             buttonTextEl.innerHTML = "Learn more";
             buttonEl.href = (0, _sdk.urlConfig).API_BASE_URL + "/docs";
-            const link = "https://testnets.opensea.io/" + walletAddress;
+            const link = "https://testnets.opensea.io/assets/mumbai/" + eniblockContract + "/" + eniblockTokenId;
             loaderEl.style.display = "none";
             buttonTextEl.style.display = "flex";
             var endMint = window.performance.now();
@@ -691,7 +691,7 @@ const mint = async ()=>{
             var end = window.performance.now();
             var time = end - start;
             console.log(time);
-            textEl.innerHTML = 'Your wallet is ready!<br />Check your <a href="' + link + '" class="text-gradient__teal" target="_blank">NFT</a>.';
+            textEl.innerHTML = '<a href="' + link + '" target="_blank">Your wallet is ready!<br />Check your <span class="text-gradient__teal">NFT</span></a>.';
         });
     });
     req.on("error", (error)=>{
