@@ -8,7 +8,7 @@ let sdk = null;
 let auth0Domain, auth0ClientId, auth0CookieDomain, eniblockAppId, eniblockContract, eniblockTokenId, eniblockMintDomain;
 
 switch (domain) {
-/*   case 'eniblock.webflow.io':
+  case 'eniblock.webflow.io':
     auth0Domain = 'testing-eniblock-sdk.eu.auth0.com';
     auth0ClientId = 'BpfQk1mCjnLak5e42iHX24feDnXRG1bq';
     auth0CookieDomain = '.eniblock.com';    
@@ -19,7 +19,7 @@ switch (domain) {
     eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'testing.demo.eniblock.com';
-    break; */
+    break;
 
   default:
     auth0Domain = 'eniblock-sdk.eu.auth0.com';
@@ -67,16 +67,15 @@ const login = async () => {
 };
 
 const mint = async () => {
-  const loaderEl = document.getElementById("demo-loader");
-  const descriptionEl = document.getElementById("demo-description");
-  const textStartEl = document.getElementById("demo-text-start");
-  const textEndEl = document.getElementById("demo-text-end");
-  const linkEl = document.getElementById("demo-link");
-  const buttonEl = document.getElementById("demo-button");
+  var start = window.performance.now();
 
-  descriptionEl.style.display = 'none';
-  textStartEl.style.display = 'none';
-  loaderEl.style.display = 'grid';
+  const loaderEl = document.getElementById("demo-loader");
+  const textEl = document.getElementById("demo-text");
+  const buttonEl = document.getElementById("demo-button");
+  const buttonTextEl = document.getElementById("demo-button-text");
+
+  buttonTextEl.style.display = 'none';
+  loaderEl.style.display = 'flex';
 
   const isAuthenticated = await auth0Client.isAuthenticated();
 
@@ -84,7 +83,11 @@ const mint = async () => {
     await login();
   }
 
+  textEl.innerHTML = 'Creating your wallet in progress...';
+
   let wallet, account;
+
+  var startWallet = window.performance.now();
 
   try {
     await sdk.wallet.destroy();
@@ -103,12 +106,21 @@ const mint = async () => {
   - Public Key: ${await account.getPublicKey()}
   - Creation Date: ${account.creationDate}`);
 
+  var endWallet = window.performance.now();
+  var timeWallet = endWallet - startWallet;
+
+  console.log(timeWallet);
+
+  textEl.innerHTML = 'Wallet created in <span class="text-gradient__teal">' + Math.ceil(timeWallet / 1000) + 'sec</span>!<br />Minting in progress...';
+
   var options = {
     host: eniblockMintDomain,
     port: 443,
     path: '/backend/functions/mint?contract=' + eniblockContract + '&to=' + walletAddress + '&tokenId=' + eniblockTokenId + '&amount=1',
     method: 'GET'
   };
+
+  var startMint = window.performance.now();
 
   var req = https.request(options, function(res) {
     res.setEncoding('utf8');
@@ -118,16 +130,27 @@ const mint = async () => {
       console.log(hash);
 
       const provider = await sdk.getProvider();
-      await provider.waitForTransaction(hash, 2);
+      await provider.waitForTransaction(hash);
 
-      buttonEl.innerHTML = 'Learn more';
+      buttonTextEl.innerHTML = 'Learn more';
       buttonEl.href = urlConfig.API_BASE_URL + '/docs';
-      linkEl.href = 'https://testnets.opensea.io/' + walletAddress;
+      const link = 'https://testnets.opensea.io/' + walletAddress;
       buttonEl.removeEventListener("click", mint);
 
       loaderEl.style.display = 'none';
-      textEndEl.style.display = 'block';
-      descriptionEl.style.display = 'grid';      
+      buttonTextEl.style.display = 'flex';  
+      
+      var endMint = window.performance.now();
+      var timeMint = endMint - startMint;
+
+      console.log(timeMint);
+
+      var end = window.performance.now();
+      var time = end - start;
+      
+      console.log(time);
+
+      textEl.innerHTML = 'Your wallet is ready!<br />Check your <a href="' + link + '" class="text-gradient__teal" target="_blank">NFT</a>.';
     });
   });
 

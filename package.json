@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.1.2",
-    "@eniblock/sdk": "0.4.0-beta.2537",
+    "@eniblock/sdk": "^1.0.1",
     "@ethersproject/contracts": "^5.7.0",
     "@ethersproject/logger": "^5.7.0",
     "@ethersproject/properties": "^5.7.0",
