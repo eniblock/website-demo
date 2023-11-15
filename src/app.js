@@ -1,6 +1,7 @@
 import { createAuth0Client } from '@auth0/auth0-spa-js';
 import { Eniblock, UnsafeStorage, urlConfig } from '@eniblock/sdk';
-import * as https from 'https'; 
+import * as https from 'https';
+import truncateEthAddress from 'truncate-eth-address';
 
 const domain = window.location.hostname;
 let auth0Client = sdk = null;
@@ -89,7 +90,7 @@ const mint = async () => {
     await login();
   }
 
-  textEl.innerHTML = 'Creating your wallet in progress...';
+  textEl.innerHTML = 'Creating your wallet<br />please wait...';
 
   var startWallet = window.performance.now();
 
@@ -132,7 +133,8 @@ const mint = async () => {
 
       buttonTextEl.innerHTML = 'Learn more';
       buttonEl.href = urlConfig.API_BASE_URL + '/docs';
-      const link = 'https://testnets.opensea.io/assets/mumbai/' + eniblockContract + '/' + eniblockTokenId;
+      const linkNFT = 'https://testnets.opensea.io/assets/mumbai/' + eniblockContract + '/' + eniblockTokenId;
+      const linkWallet = 'https://mumbai.polygonscan.com/address/' + walletAddress + '#nfttransfers';
 
       loaderEl.style.display = 'none';
       buttonTextEl.style.display = 'flex';  
@@ -147,7 +149,7 @@ const mint = async () => {
       
       console.log(time);
 
-      textEl.innerHTML = '<a href="' + link + '" target="_blank">Your wallet is ready!<br />Check your <span class="text-gradient__teal">NFT</span>.</a>';
+      textEl.innerHTML = '<a href="' + linkWallet + '" target="_blank">Your wallet: ' + truncateEthAddress(walletAddress) + '</a><br /><a href="' + linkNFT + '" target="_blank">Check your <span class="text-gradient__teal">NFT</span>.</a>';
     });
   });
 

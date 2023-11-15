@@ -575,9 +575,12 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"bNKaB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _auth0SpaJs = require("@auth0/auth0-spa-js");
 var _sdk = require("@eniblock/sdk");
 var _https = require("https");
+var _truncateEthAddress = require("truncate-eth-address");
+var _truncateEthAddressDefault = parcelHelpers.interopDefault(_truncateEthAddress);
 const domain = window.location.hostname;
 let auth0Client = sdk = null;
 let wallet, account;
@@ -652,7 +655,7 @@ const mint = async ()=>{
     loaderEl.style.display = "flex";
     const isAuthenticated = await auth0Client.isAuthenticated();
     if (!isAuthenticated) await login();
-    textEl.innerHTML = "Creating your wallet in progress...";
+    textEl.innerHTML = "Creating your wallet<br />please wait...";
     var startWallet = window.performance.now();
     try {
         await createWallet();
@@ -682,7 +685,8 @@ const mint = async ()=>{
             await provider.waitForTransaction(hash);
             buttonTextEl.innerHTML = "Learn more";
             buttonEl.href = (0, _sdk.urlConfig).API_BASE_URL + "/docs";
-            const link = "https://testnets.opensea.io/assets/mumbai/" + eniblockContract + "/" + eniblockTokenId;
+            const linkNFT = "https://testnets.opensea.io/assets/mumbai/" + eniblockContract + "/" + eniblockTokenId;
+            const linkWallet = "https://mumbai.polygonscan.com/address/" + walletAddress + "#nfttransfers";
             loaderEl.style.display = "none";
             buttonTextEl.style.display = "flex";
             var endMint = window.performance.now();
@@ -691,7 +695,7 @@ const mint = async ()=>{
             var end = window.performance.now();
             var time = end - start;
             console.log(time);
-            textEl.innerHTML = '<a href="' + link + '" target="_blank">Your wallet is ready!<br />Check your <span class="text-gradient__teal">NFT</span>.</a>';
+            textEl.innerHTML = '<a href="' + linkWallet + '" target="_blank">Your wallet: ' + (0, _truncateEthAddressDefault.default)(walletAddress) + '</a><br /><a href="' + linkNFT + '" target="_blank">Check your <span class="text-gradient__teal">NFT</span>.</a>';
         });
     });
     req.on("error", (error)=>{
@@ -700,7 +704,7 @@ const mint = async ()=>{
     req.end();
 };
 
-},{"@auth0/auth0-spa-js":"eAczX","@eniblock/sdk":"2UROu","https":"djrPu"}],"eAczX":[function(require,module,exports) {
+},{"@auth0/auth0-spa-js":"eAczX","@eniblock/sdk":"2UROu","https":"djrPu","truncate-eth-address":"j87r0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eAczX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Auth0Client", ()=>te);
@@ -92301,6 +92305,24 @@ module.exports = function(str, opts) {
     return utils.compact(obj);
 };
 
-},{"e76649c95dd0e736":"chmkc"}]},["8lxlQ","bNKaB"], "bNKaB", "parcelRequire94c2")
+},{"e76649c95dd0e736":"chmkc"}],"j87r0":[function(require,module,exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+// Captures 0x + 4 characters, then the last 4 characters.
+var truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
+/**
+ * Truncates an ethereum address to the format 0x0000…0000
+ * @param address Full address to truncate
+ * @returns Truncated address
+ */ var truncateEthAddress = function(address) {
+    var match = address.match(truncateRegex);
+    if (!match) return address;
+    return match[1] + "\u2026" + match[2];
+};
+exports.default = truncateEthAddress;
+
+},{}]},["8lxlQ","bNKaB"], "bNKaB", "parcelRequire94c2")
 
 //# sourceMappingURL=app.js.map

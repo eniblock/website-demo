@@ -27,6 +27,7 @@
     "@ethersproject/properties": "^5.7.0",
     "@ethersproject/transactions": "^5.7.0",
     "ethers": "5.7.2",
+    "truncate-eth-address": "^1.0.2",
     "websocket": "^1.0.34"
   }
 }
