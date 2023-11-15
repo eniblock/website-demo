@@ -149,7 +149,7 @@ const mint = async () => {
       
       console.log(time);
 
-      textEl.innerHTML = '<a href="' + linkWallet + '" target="_blank">Your wallet: ' + truncateEthAddress(walletAddress) + '</a><br /><a href="' + linkNFT + '" target="_blank">Check your <span class="text-gradient__teal">NFT</span>.</a>';
+      textEl.innerHTML = '<a href="' + linkWallet + '" target="_blank">Your wallet: <span class="text-gradient__teal">' + truncateEthAddress(walletAddress) + '</span></a><br /><a href="' + linkNFT + '" target="_blank">Check your <span class="text-gradient__teal">NFT</span>.</a>';
     });
   });
 
