@@ -147,7 +147,7 @@ const mint = async () => {
       
       console.log(time);
 
-      textEl.innerHTML = '<a href="' + link + '" target="_blank">Your wallet is ready!<br />Check your <span class="text-gradient__teal">NFT</span></a>.';
+      textEl.innerHTML = '<a href="' + link + '" target="_blank">Your wallet is ready!<br />Check your <span class="text-gradient__teal">NFT</span>.</a>';
     });
   });
 
