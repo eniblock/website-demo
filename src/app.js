@@ -3,8 +3,8 @@ import { Eniblock, UnsafeStorage, urlConfig } from '@eniblock/sdk';
 import * as https from 'https'; 
 
 const domain = window.location.hostname;
-let auth0Client = null;
-let sdk = null;
+let auth0Client = sdk = null;
+let wallet, account;
 let auth0Domain, auth0ClientId, auth0CookieDomain, eniblockAppId, eniblockContract, eniblockTokenId, eniblockMintDomain;
 
 switch (domain) {
@@ -15,7 +15,7 @@ switch (domain) {
 
     urlConfig.API_BASE_URL = "https://testing.sdk.eniblock.com";
 
-    eniblockAppId = 'intelligent-panini-1751'; 
+    eniblockAppId = 'eniblock-website'; 
     eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'testing.demo.eniblock.com';
@@ -26,7 +26,7 @@ switch (domain) {
     auth0ClientId = 'kQh2yBn9gIIvDmFJ2LIHoPgK7PcDPbXG';
     auth0CookieDomain = '.eniblock.com';    
 
-    eniblockAppId = 'bold-rosalind-5706';
+    eniblockAppId = 'eniblock-website';
     eniblockContract = '0x88D7275D31E55d6a71a516B49b3DcD3282eE8845';
     eniblockTokenId = '1';
     eniblockMintDomain = 'demo.eniblock.com';
@@ -66,7 +66,12 @@ const login = async () => {
   });
 };
 
-const mint = async () => {
+const createWallet = async () => {
+  wallet = await sdk.wallet.instantiate();
+  account = await wallet.account.instantiate("My first account");
+}
+
+const mint = async () => {  
   var start = window.performance.now();
 
   const loaderEl = document.getElementById("demo-loader");
@@ -74,6 +79,7 @@ const mint = async () => {
   const buttonEl = document.getElementById("demo-button");
   const buttonTextEl = document.getElementById("demo-button-text");
 
+  buttonEl.removeEventListener("click", mint);
   buttonTextEl.style.display = 'none';
   loaderEl.style.display = 'flex';
 
@@ -85,26 +91,18 @@ const mint = async () => {
 
   textEl.innerHTML = 'Creating your wallet in progress...';
 
-  let wallet, account;
-
   var startWallet = window.performance.now();
 
   try {
-    await sdk.wallet.destroy();
-    wallet = await sdk.wallet.instantiate();
-    account = await wallet.account.instantiate("My first account");
+    await createWallet();
   } catch (error) {
-    console.log(error);
+    await sdk.wallet.destroy();
+    await createWallet();
   }
 
   const walletAddress = await account.getAddress();
 
-  console.log(`Account Details:
-  - Address: ${await account.getAddress()}
-  - Alias: ${account.alias}
-  - Balance: ${(await account.getNativeBalance()).balance}
-  - Public Key: ${await account.getPublicKey()}
-  - Creation Date: ${account.creationDate}`);
+  console.log(walletAddress);
 
   var endWallet = window.performance.now();
   var timeWallet = endWallet - startWallet;
@@ -135,7 +133,6 @@ const mint = async () => {
       buttonTextEl.innerHTML = 'Learn more';
       buttonEl.href = urlConfig.API_BASE_URL + '/docs';
       const link = 'https://testnets.opensea.io/' + walletAddress;
-      buttonEl.removeEventListener("click", mint);
 
       loaderEl.style.display = 'none';
       buttonTextEl.style.display = 'flex';  
