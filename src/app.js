@@ -11,7 +11,7 @@ let auth0Domain, auth0ClientId, auth0CookieDomain, eniblockAppId, eniblockContra
 switch (domain) {
   case 'eniblock.webflow.io':
     auth0Domain = 'testing-eniblock-sdk.eu.auth0.com';
-    auth0ClientId = 'BpfQk1mCjnLak5e42iHX24feDnXRG1bq';
+    auth0ClientId = '5Cl5MlqkYMK63WvvU28ALwOROzr8vjnV';
     auth0CookieDomain = '.eniblock.com';    
 
     urlConfig.API_BASE_URL = "https://testing.sdk.eniblock.com";
