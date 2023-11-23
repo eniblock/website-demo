@@ -24,7 +24,7 @@ switch (domain) {
 
   default:
     auth0Domain = 'eniblock-sdk.eu.auth0.com';
-    auth0ClientId = 'kQh2yBn9gIIvDmFJ2LIHoPgK7PcDPbXG';
+    auth0ClientId = 'rxwQAJoQFg39qCnw01JE8eprQqRIo1HK';
     auth0CookieDomain = '.eniblock.com';    
 
     eniblockAppId = 'eniblock-website';
